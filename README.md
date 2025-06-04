@@ -7,7 +7,9 @@ Since no data is copied, zero-copy, facilitated by references, leads to signific
 - **Reduced CPU Cycles:** The CPU doesn't spend time copying memory blocks. This is especially important for large amounts of data (network packets, large files).
 - **Better CPU Cache Utilization:** Data remains in its original memory location, increasing the chances it's already in the CPU cache, which reduces latency for accessing main memory.
 
-It represents one of the most interesting challenges in the ecosystem: how to deserialize data without copying its content, while respecting the strict rules of the borrow checker? This synthesis explores the different approaches developed by the Rust community.
+It represents one of the most interesting challenges in the ecosystem: how to deserialize data without copying its content, while respecting the strict rules of the borrow checker ?
+
+This synthesis explores the different approaches developed by the Rust community.
 
 
 ## The Fundamental Problem
@@ -220,6 +222,19 @@ fn main() {
 
 [**Full code with comments, here !**](https://github.com/Laugharne/rust_example_zerocopy)
 
+**So many tools**
+
+While `Cow` and `zerocopy` are commonly used tools for zero-copy data access in Rust, they are by no means the only options available. The Rust ecosystem provides several other powerful crates tailored to different zero-copy scenarios.
+
+The `yoke` crate is particularly useful when you need to tie borrowed data to an owned container, ensuring safe lifetimes without manual lifetime gymnastics.
+
+For more advanced cases like self-referential structs—where part of a structure borrows from another part `ouroboros` provides safe abstractions that would otherwise be impossible in safe Rust.
+
+Additionally, the `bytemuck` crate enables zero-cost casting between raw bytes and plain data structures, assuming alignment and layout guarantees are met.
+
+Together, these tools offer a rich toolbox for building fast and memory-efficient applications while preserving Rust’s safety guarantees.
+
+
 ## Application to the Pinocchio Framework for Solana
 
 The **Pinocchio** framework for Solana represents an excellent example of practical application of zero-copy techniques in a high-performance blockchain context. Since Solana is designed to process thousands of transactions per second, every performance optimization matters.
@@ -275,6 +290,10 @@ Feel free to check out my previous articles on [**Medium**](https://medium.com/@
 **Yoke:**
 - [crates.io: yoke](https://crates.io/crates/yoke)
 - [Yoke in yoke - Rust](https://docs.rs/yoke/latest/yoke/struct.Yoke.html)
+
+**Bytemuck**
+- [crates.io: bytemuck](https://crates.io/crates/bytemuck)
+- [bytemuck - Rust](https://docs.rs/bytemuck/1.23.0/bytemuck/)
 
 **Solana Frameworks:**
 - [Anchor: Zero Copy](https://www.anchor-lang.com/docs/features/zero-copy)
