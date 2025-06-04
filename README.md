@@ -1,5 +1,7 @@
 # Zero-Copy in Rust: Challenges and Solutions
 
+![](img/2025-06-04-16-31-15.png)
+
 The concept of **zero-copy** in Rust refers to a technique of working with data in memory without making unnecessary copies, which significantly improves performance, particularly in high-throughput and low-latency environments.
 
 Since no data is copied, zero-copy, facilitated by references, leads to significant performance gains:
@@ -228,27 +230,27 @@ While `Cow` and `zerocopy` are commonly used tools for zero-copy data access in 
 
 The `yoke` crate is particularly useful when you need to tie borrowed data to an owned container, ensuring safe lifetimes without manual lifetime gymnastics.
 
-For more advanced cases like self-referential structs—where part of a structure borrows from another part `ouroboros` provides safe abstractions that would otherwise be impossible in safe Rust.
+For more advanced cases like "self-referential-structs" where part of a structure borrows from another part `ouroboros` provides safe abstractions that would otherwise be impossible in safe Rust.
 
 Additionally, the `bytemuck` crate enables zero-cost casting between raw bytes and plain data structures, assuming alignment and layout guarantees are met.
 
-Together, these tools offer a rich toolbox for building fast and memory-efficient applications while preserving Rust’s safety guarantees.
+Together, these tools as many others, offer a rich toolbox for building fast and memory-efficient applications while preserving Rust’s safety guarantees.
 
 
 ## Application to the Pinocchio Framework for Solana
 
-The **Pinocchio** framework for Solana represents an excellent example of practical application of zero-copy techniques in a high-performance blockchain context. Since Solana is designed to process thousands of transactions per second, every performance optimization matters.
+The **Pinocchio** framework for Solana represents an excellent example of practical application of **zero-copy techniques** in a high-performance blockchain context. Since Solana is designed to process thousands of transactions per second, every performance optimization matters.
 
 **Comparison with Anchor**
 
 Unlike **Anchor**, another popular framework for developing Solana programs, Pinocchio is designed to be minimalist and dependency-free.
 
-Anchor provides advanced features automatic IDL (_Interface Description Language_) generation and macros to simplify development.  But this comes with increased complexity and larger binary sizes.
+Anchor provides advanced features **automatic IDL** (_Interface Description Language_) generation and **macros** to simplify development.  But this comes with increased complexity and larger binary sizes.
 
 
 ## Conclusion
 
-Zero-copy in Rust is not just a low-level optimization—it’s a mindset that influences how data is accessed, moved, and processed.  By avoiding unnecessary memory allocations and leveraging Rust’s powerful type system, developers can achieve significant performance gains, especially in systems where latency, memory footprint, and CPU cycles matter deeply.
+Zero-copy in Rust is not just a low-level optimization, it’s a mindset that influences how data is accessed, moved, and processed.  By avoiding unnecessary memory allocations and leveraging Rust’s powerful type system, developers can achieve significant performance gains, especially in systems where latency, memory footprint, and CPU cycles matter deeply.
 
 Throughout this article, we’ve explored how Rust enables zero-copy patterns through lifetimes, references, smart pointers like `Cow`, and libraries such as `zerocopy`.
 
