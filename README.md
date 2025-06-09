@@ -1,6 +1,16 @@
 # Zero-Copy in Rust: Challenges and Solutions
 
-![](img/2025-06-04-16-31-15.png)
+![](img/2025-06-04-16-36-29.png)
+
+
+## TL;DR
+
+- Zero-copy reduces memory allocations, CPU cycles, and improves CPU cache utilization, leading to better performance, especially with large data sets.
+- Managing reference lifetimes to ensure they remain valid without copying data.
+- Use references or pointers to access data directly, avoiding unnecessary copies. Utilize Rust's references and types like `Cow` (_Copy-On-Write_) for efficient data handling.
+
+
+## Introduction
 
 The concept of **zero-copy** in Rust refers to a technique of working with data in memory without making unnecessary copies, which significantly improves performance, particularly in high-throughput and low-latency environments.
 
@@ -22,7 +32,7 @@ In Rust, zero-copy consists of creating data structures that directly reference 
 ## Basic Principles
 
 1. **Avoiding Unnecessary Copies**: Rather than copying data from one location to another, references or pointers are used to directly access the original data. This reduces memory overhead and improves performance.
-2. **Using References**: In Rust, this can be achieved using references (`&`) or types like `Cow` (Copy-On-Write), which allow working with **borrowed** or **owned** data transparently.
+2. **Using References**: In Rust, this can be achieved using references (`&`) or types like `Cow` (_Copy-On-Write_), which allow working with **borrowed** or **owned** data transparently.
 
 
 ## Zero-Copy Examples in Rust
